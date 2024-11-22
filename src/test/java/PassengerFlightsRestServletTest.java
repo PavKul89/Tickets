@@ -1,3 +1,4 @@
+import org.example.service.PassengerService;
 import org.example.servlet.PassengerFlightsRestServlet;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import static org.mockito.Mockito.*;
 
@@ -44,4 +46,6 @@ public class PassengerFlightsRestServletTest {
         servlet.doGet(request, response);
         verify(response).sendError(HttpServletResponse.SC_BAD_REQUEST, "Passenger ID is required");
     }
+
+
 }

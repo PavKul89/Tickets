@@ -64,6 +64,31 @@ class TicketServletTest {
     }
 
     @Test
+    void doDelete_DeletesTicketSuccessfully() throws Exception {
+
+        when(request.getParameter("id")).thenReturn("1");
+        when(ticketService.deleteTicket(1L)).thenReturn(true);
+
+        ticketServlet.doDelete(request, response);
+
+        verify(ticketService, times(1)).deleteTicket(1L);
+        verify(response, times(1)).setStatus(HttpServletResponse.SC_NO_CONTENT);
+    }
+
+    @Test
+    void doDelete_TicketNotFound() throws Exception {
+
+        when(request.getParameter("id")).thenReturn("1");
+        when(ticketService.deleteTicket(1L)).thenReturn(false);
+
+        ticketServlet.doDelete(request, response);
+
+        verify(ticketService, times(1)).deleteTicket(1L);
+        verify(response, times(1)).setStatus(HttpServletResponse.SC_NOT_FOUND);
+    }
+
+
+    @Test
     void doPost_SavesTicket() throws Exception {
 
         TicketDTO inputTicket = new TicketDTO();
@@ -100,6 +125,7 @@ class TicketServletTest {
     }
 
 
+
     private void setField(Object target, String fieldName, Object value) {
         try {
             var field = target.getClass().getDeclaredField(fieldName);
@@ -109,4 +135,5 @@ class TicketServletTest {
             throw new RuntimeException("Failed to set field", e);
         }
     }
+
 }

@@ -29,6 +29,7 @@ public class FlightTest {
         passenger2 = new Passenger(2L, "Jane Smith", new ArrayList<>());
     }
 
+
     @Test
     public void testFlightInitialization() {
 
@@ -77,15 +78,19 @@ public class FlightTest {
         assertTrue(passenger1.getFlights().contains(flight2), "Passenger1 should have flight2");
     }
 
+
     @Test
     public void testRemovePassengerFromFlight() {
-
         flight1.addPassenger(passenger1);
-        assertTrue(flight1.getPassengers().contains(passenger1), "Flight1 should contain passenger1");
-
         flight1.getPassengers().remove(passenger1);
-
-        assertFalse(flight1.getPassengers().contains(passenger1), "Flight1 should not contain passenger1 after removal");
+        assertFalse(flight1.getPassengers().contains(passenger1));
     }
+
+    @Test
+    public void testAddPassengerToFlightWithNullPassenger() {
+        assertThrows(NullPointerException.class, () -> flight1.addPassenger(null));
+    }
+
+
 }
 

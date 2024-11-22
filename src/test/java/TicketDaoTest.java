@@ -76,6 +76,31 @@ public class TicketDaoTest {
         assertFalse(result.isPresent(), "Expected Optional to be empty");
     }
 
+    @Test
+    public void testSaveDuplicateSeatTicket() {
+        Ticket duplicateTicket = new Ticket(
+                null,
+                "P003",
+                "Duplicate Passenger",
+                flightDao.findById(1L, connection).orElseThrow(),
+                "1A",
+                BigDecimal.valueOf(300.00)
+        );
+
+        Ticket savedTicket = ticketDao.save(duplicateTicket);
+
+        assertNull(savedTicket.getId(), "Duplicate ticket should not be saved");
+    }
+
+    @Test
+    public void testFindAllWithComplexFilter() {
+        TicketFilter filter = new TicketFilter(10, 0, null, "1A");
+        List<Ticket> tickets = ticketDao.findAll(filter);
+
+        assertFalse(tickets.isEmpty(), "Expected at least one ticket in the list");
+        assertEquals("1A", tickets.get(0).getSeatNo(), "Seat number should match");
+    }
+
 
     @Test
     public void testFindAllWithFilter() {

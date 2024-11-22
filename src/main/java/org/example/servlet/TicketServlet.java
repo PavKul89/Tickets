@@ -91,6 +91,8 @@ public class TicketServlet extends HttpServlet {
             this.status = status;
         }
 
+
+
         public String getMessage() {
             return message;
         }
@@ -99,4 +101,10 @@ public class TicketServlet extends HttpServlet {
             return status;
         }
     }
+
+
+
+
+
+
 }
