@@ -102,9 +102,4 @@ public class TicketServlet extends HttpServlet {
         }
     }
 
-
-
-
-
-
 }
