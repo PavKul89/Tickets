@@ -33,7 +33,6 @@ public class TicketService {
         return toDTO(savedTicket);
     }
 
-
     public boolean deleteTicket(Long id) {
         return ticketDao.delete(id);
     }

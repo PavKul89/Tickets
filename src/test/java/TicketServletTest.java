@@ -29,7 +29,7 @@ class TicketServletTest {
     void setUp() {
         ticketService = mock(TicketService.class);
         ticketServlet = new TicketServlet();
-        setField(ticketServlet, "ticketService", ticketService); // Вручную внедряем зависимость
+        setField(ticketServlet, "ticketService", ticketService);
 
         request = mock(HttpServletRequest.class);
         response = mock(HttpServletResponse.class);

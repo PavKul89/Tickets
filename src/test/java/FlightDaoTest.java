@@ -73,7 +73,7 @@ public class FlightDaoTest {
 
     @Test
     public void testFindById_SqlException() throws SQLException {
-        // Провоцируем исключение SQLException
+
         Connection brokenConnection = Mockito.mock(Connection.class);
         when(brokenConnection.prepareStatement(anyString())).thenThrow(new SQLException("Database error"));
         assertThrows(RuntimeException.class, () -> flightDao.findById(1L, brokenConnection));

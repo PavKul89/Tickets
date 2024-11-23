@@ -82,7 +82,7 @@ public class TicketDao implements Dao<Long, Ticket> {
         try (var connection = ConnectionManager.get();
              var preparedStatement = connection.prepareStatement(SAVE_SQL, Statement.RETURN_GENERATED_KEYS)
         ) {
-            // Проверка на существование билета с таким же местом на том же рейсе
+
             String checkExistenceSQL = "SELECT COUNT(*) FROM ticket WHERE flight_id = ? AND seat_no = ?";
             try (var checkStatement = connection.prepareStatement(checkExistenceSQL)) {
                 checkStatement.setLong(1, ticket.getFlight().getId());

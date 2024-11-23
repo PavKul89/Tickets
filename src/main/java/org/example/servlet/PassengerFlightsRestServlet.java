@@ -30,7 +30,6 @@ public class PassengerFlightsRestServlet extends HttpServlet {
 
                 List<FlightDTO> flights = passengerService.getFlightsByPassengerId(passengerId);
 
-
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
 

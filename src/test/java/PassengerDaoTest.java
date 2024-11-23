@@ -32,7 +32,7 @@ public class PassengerDaoTest {
         System.setProperty("DB_USER", POSTGRES_CONTAINER.getUsername());
         System.setProperty("DB_PASSWORD", POSTGRES_CONTAINER.getPassword());
         try (Connection connection = ConnectionManager.get()) {
-            // Инициализация базы данных для тестов
+
             connection.createStatement().execute("""
                 CREATE TABLE IF NOT EXISTS flight (
                     id SERIAL PRIMARY KEY,
@@ -71,13 +71,13 @@ public class PassengerDaoTest {
 
     @Test
     public void testSavePassengerFlight_FlightDoesNotExist() {
-        // Тестируем, что метод выбрасывает исключение, если рейса не существует
+
         assertThrows(RuntimeException.class, () -> passengerDao.savePassengerFlight(1L, 999L));
     }
 
     @Test
     public void testSavePassengerFlight_PassengerDoesNotExist() {
-        // Тестируем, что метод выбрасывает исключение, если пассажира не существует
+
         assertThrows(RuntimeException.class, () -> passengerDao.savePassengerFlight(999L, 1L));
     }
 

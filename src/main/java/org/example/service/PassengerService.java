@@ -23,7 +23,7 @@ public class PassengerService {
     }
 
     public List<FlightDTO> getFlightsByPassengerId(Long passengerId) {
-        return passengerDao.findFlightsByPassengerId(passengerId); // Теперь возвращаем FlightDTO
+        return passengerDao.findFlightsByPassengerId(passengerId);
     }
 }
 
