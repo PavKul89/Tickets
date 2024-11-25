@@ -3,9 +3,9 @@ pipeline {
 
     environment {
         // Переменные среды
-        DEPLOY_PATH = '/path/to/tomcat/webapps/' // Путь к папке с приложениями Tomcat
-        GIT_REPO = 'https://github.com/your-repo/ticket.git'
-        BRANCH = 'master'
+        DEPLOY_PATH = '/usr/share/tomcat9' // Путь к папке с приложениями Tomcat
+        GIT_REPO = 'git@github.com:PavKul89/Tickets.git'
+        BRANCH = 'main'
         APP_NAME = 'TicketProject-1.0-SNAPSHOT.war' // Имя вашего артефакта
     }
 
@@ -18,7 +18,6 @@ pipeline {
 
         stage('Build') {
             steps {
-                // Предполагается, что используется Maven
                 sh 'mvn clean package'
             }
         }
