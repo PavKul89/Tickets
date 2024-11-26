@@ -8,6 +8,7 @@ pipeline {
         TOMCAT_BIN_DIR = "/home/pavel/apache-tomcat/bin"
         BACKUP_DIR="TicketProject/backups"
     }
+    ///////
 
     stages {
         stage('Checkout') {
