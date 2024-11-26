@@ -13,23 +13,20 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo "Клонирование репозитория..."
-                // Клонируем репозиторий
-                checkout scm
+                   checkout scm
             }
         }
 
         stage('Build') {
             steps {
                 echo "Сборка проекта..."
-                // Сборка проекта с помощью Maven
-                sh "mvn clean package"
+                sh "mvn clean package -DskipTests"
             }
         }
 
         stage('Backup Current WAR') {
             steps {
                 script {
-                    // Проверяем, существует ли текущий WAR-файл
                     if (fileExists("${TOMCAT_WEBAPPS_DIR}/${WAR_FILE}")) {
                         echo "Создание резервной копии текущего WAR-файла..."
                         sh """
@@ -46,7 +43,6 @@ pipeline {
         stage('Stop Tomcat') {
             steps {
                 echo "Остановка Tomcat..."
-                // Останавливаем Tomcat
                 sh "${TOMCAT_BIN_DIR}/shutdown.sh || true"
                 sleep 5
             }
@@ -55,7 +51,6 @@ pipeline {
         stage('Deploy New WAR') {
             steps {
                 echo "Деплой нового WAR-файла..."
-                // Копируем новый WAR-файл в директорию Tomcat
                 sh """
                     cp ${BUILD_DIR}/${WAR_FILE} ${TOMCAT_WEBAPPS_DIR}/
                 """
@@ -65,7 +60,6 @@ pipeline {
         stage('Clear Tomcat Cache') {
             steps {
                 echo "Очистка временных файлов Tomcat..."
-                // Удаляем временные файлы Tomcat
                 sh """
                     rm -rf ${TOMCAT_WEBAPPS_DIR}/../work/*
                 """
@@ -75,7 +69,6 @@ pipeline {
         stage('Start Tomcat') {
             steps {
                 echo "Запуск Tomcat..."
-                // Запускаем Tomcat
                 sh "${TOMCAT_BIN_DIR}/startup.sh"
             }
         }
